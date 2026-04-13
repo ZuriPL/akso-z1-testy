@@ -3,6 +3,8 @@
 id=$1
 mem=$2
 
+returnCode=0
+
 oPassed=0
 oAll=0
 
@@ -14,7 +16,7 @@ then
     for i in {1..20}
     do
         bash test.sh $i $mem
-        if [[ $? == 67 ]]
+        if [[ $? == 0 ]]
         then
             tPassed=$((tPassed+1))
         fi
@@ -26,8 +28,10 @@ else
     if [[ $mem == "false" ]]
     then
         ./tester $id
+        returnCode=$?
     else
         valgrind --leak-check=full --errors-for-leak-kinds=all --show-leak-kinds=all --quiet ./tester $id
+        returnCode=$?
     fi
 
     for t in ./tests/output/test${id}_*.model.out
@@ -42,13 +46,13 @@ else
     done
     echo "Output files (rstack_write): $oPassed / $oAll correct"
     echo "-----------------------------------------------"
-    if [[ $oPassed == $oAll && $? == 0 ]]
+    if [[ $oPassed == $oAll && $returnCode == 0 ]]
     then
         echo "PASSED"
-        exit 67
+        exit 0
     else
         echo "FAILED"
-        exit 69
+        exit 67
     fi
 fi
 

@@ -38,17 +38,18 @@ int do_test(int i) {
         printf("Assertions (rstack_front / rstack_empty) failed\n");
     } else {
         printf("Assertions (rstack_front / rstack_empty) passed\n");
-        return 1;
     }
 
-    return 0;
+    return result;
 }
 
 int main(int argc, char *argv[]) {
+    int code = 1;
     if (argc == 2) {
-        do_test(atoi(argv[1]));
+        code = do_test(atoi(argv[1]));
     } else {
         printf("Podaj numer testu jako argument\n");
     }
-}
 
+    return code;
+}
