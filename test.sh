@@ -30,7 +30,7 @@ else
         ./tester $id
         returnCode=$?
     else
-        valgrind --leak-check=full --errors-for-leak-kinds=all --show-leak-kinds=all --quiet ./tester $id
+        valgrind --leak-check=full --errors-for-leak-kinds=all --show-leak-kinds=all --quiet --error-exitcode=69 ./tester $id
         returnCode=$?
     fi
 
