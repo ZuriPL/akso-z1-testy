@@ -20,7 +20,7 @@ Struktura folderu powinna wygladać następująco:
  	- tests/
  	- test.sh
 
-2. Skompiluj testy następującą komendą: gcc test*.c --std=gnu23 -L. -lrstack -o tester
+2. Skompiluj testy następującą komendą: `gcc test*.c --std=gnu23 -L. -lrstack -o tester`
 
 3. Ustaw LD_LIBRARY_PATH na folder w którym znajduję się projekt (jeżeli obecnie w nim jesteś, to w terminal wpisz `export LD_LIBRARY_PATH=$(pwd)`)
 
