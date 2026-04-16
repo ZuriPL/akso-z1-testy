@@ -2,6 +2,7 @@
 
 id=$1
 mem=$2
+diff=$3
 
 returnCode=0
 
@@ -13,9 +14,9 @@ tAll=0
 
 if [ $id == "all" ]
 then
-    for i in {1..40}
+    for i in {1..50}
     do
-        bash test.sh $i $mem
+        bash test.sh $i $mem $diff
         if [[ $? == 0 ]]
         then
             tPassed=$((tPassed+1))
@@ -34,17 +35,23 @@ else
         returnCode=$?
     fi
 
-    for t in ./tests/output/test${id}_*.model.out
-    do
-        if diff -q "${t%model.out}result.out" $t
-        then
-            oPassed=$((oPassed + 1))
-        else
-            diff "${t%model.out}out" $t -y
-        fi
-        oAll=$((oAll + 1))
-    done
-    echo "Output files (rstack_write): $oPassed / $oAll correct"
+
+    if [[ $diff == "false" ]]
+    then
+        $()
+    else
+        for t in ./tests/output/test${id}_*.model.out
+        do
+            if diff -q -d -y "${t%model.out}result.out" $t
+            then
+                oPassed=$((oPassed + 1))
+            else
+                diff "${t%model.out}out" $t -y
+            fi
+            oAll=$((oAll + 1))
+        done
+        echo "Output files (rstack_write): $oPassed / $oAll correct"
+    fi
     echo "-----------------------------------------------"
     if [[ $oPassed == $oAll && $returnCode == 0 ]]
     then

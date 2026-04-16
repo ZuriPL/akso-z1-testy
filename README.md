@@ -26,7 +26,11 @@ Struktura folderu powinna wygladać następująco:
 
 4. Uruchom testy:
 
-`bash test.sh numer_testu/"all" (true/false - false wyłącza valgrind'a)`
+`bash test.sh numer_testu/"all" (valgrind) (diff)`
+
+> valgrind i diff to opcjalne argumenty, domyślnie ustawione na true. ustawienie ich na false pozwala wyłączyć daną funkcję
+
+> wyłączenie diff'a może być przydatne, żeby przeczytać inne błędy
 
 i gotowe :D
 

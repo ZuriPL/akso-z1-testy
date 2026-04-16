@@ -1,2 +1,7 @@
 librstack.so
 tester
+rstack.*
+makefile
+memory_tests.*
+.vscode
+tests/output/*.result.out
