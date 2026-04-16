@@ -13,7 +13,7 @@ tAll=0
 
 if [ $id == "all" ]
 then
-    for i in {1..20}
+    for i in {1..40}
     do
         bash test.sh $i $mem
         if [[ $? == 0 ]]
